@@ -185,7 +185,10 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn) {
-    throw new Error('Not implemented');
+    const argsArray = Array.from(arguments);
+    const [func, ...partialArguments] = argsArray;
+
+    return (...args) => fn(...partialArguments, ...args);
 }
 
 
