@@ -22,7 +22,8 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   throw new Error('Not implemented');
+   return new Date(value);
+    
 }
 
 /**
@@ -37,7 +38,8 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   throw new Error('Not implemented');
+   return new Date(value);
+    
 }
 
 
@@ -56,7 +58,12 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   throw new Error('Not implemented');
+   let year = date.getFullYear();
+   if (year % 4 != 0) return false;
+   else if (year % 100 != 0) return true;
+   else if (year % 400) return false;
+   else return true;
+    
 }
 
 
@@ -76,7 +83,20 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
+   let res = '';
+   let hours =  endDate.getUTCHours() - startDate.getUTCHours();
+   let minutes =  endDate.getUTCMinutes() - startDate.getUTCMinutes();
+   let seconds =  endDate.getUTCSeconds() - startDate.getUTCSeconds();
+   let milliseconds =  endDate.getUTCMilliseconds() - startDate.getUTCMilliseconds();
+   hours >= 10 ? hours : hours = '0' + hours;
+   minutes >= 10 ? minutes : minutes = '0' + minutes;
+   seconds >= 10 ? seconds : seconds = '0' + seconds;
+   milliseconds >= 100 ? milliseconds :
+   milliseconds < 100 && milliseconds >=10 ? milliseconds = '0' + milliseconds :
+   milliseconds = '00' + milliseconds;
+   res += hours + ':' + minutes + ':' + seconds + '.' + milliseconds;
+   return res;
+    
 }
 
 
@@ -94,7 +114,11 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+   let h = date.getUTCHours(), m = date.getUTCMinutes();
+   h >= 12 ? h -= 12 : h;
+   let res = Math.abs((60 * h - 11 * m) * Math.PI / 360);
+   return res > Math.PI ? 2 * Math.PI - res : res;
+    
 }
 
 
