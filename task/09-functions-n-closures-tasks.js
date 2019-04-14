@@ -52,7 +52,7 @@ function getComposition(...functions) {
  *
  */
 function getPowerFunction(exponent) {
-    throw new Error('Not implemented');
+    return (n) => Math.pow(n,exponent);
 }
 
 
